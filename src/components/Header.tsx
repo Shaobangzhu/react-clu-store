@@ -3,13 +3,24 @@ import Logo from "../assets/apple.svg?react";
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { useState } from "react";
 import DarkToggle from "./DarkToggle";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { SHOPPING_PAGES } from "@/assets/data/path";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchEnable, setIsSearchEnable] = useState(false);
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (query.trim()) {
+        navigate(`/search?query=${encodeURIComponent(query)}`);
+        setQuery("");
+      }
+    }
+  };
   return (
     <nav
       className="flex items-center justify-between px-4 h-16 sticky top-0 z-50 
@@ -48,6 +59,10 @@ const Header = () => {
             className="peer border 
             border-apple-gray-200 px-4 py-2 w-64 rounded-lg focus:outline-none focus:ring-2 
             focus:ring-apple-blue transition"
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <label
             className="absolute left-2 top-2

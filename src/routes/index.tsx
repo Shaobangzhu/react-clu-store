@@ -16,6 +16,7 @@ import {
   ErrorPage,
   NotFound,
   ProductDetail,
+  SearchResults,
 } from "../pages";
 
 const router = createBrowserRouter([
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
       {
         path: "product-detail/:id",
         element: <ProductDetail />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "search",
+        element: <SearchResults />,
         errorElement: <ErrorPage />,
       },
       { path: "*", element: <NotFound /> },
