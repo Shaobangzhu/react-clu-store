@@ -14,6 +14,8 @@ function SignIn() {
       return;
     }
     // 模拟登陆逻辑
+    localStorage.setItem("token", "mocked_token"); // 模拟存储 token
+
     navigate(
       location.state?.from || "/", // 优先跳转来源页面
       { replace: true },

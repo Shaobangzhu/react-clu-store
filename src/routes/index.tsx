@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Header, Footer } from "@/components";
 import MainLayout from "@/layouts/MainLayout";
 import BlankLayout from "@/layouts/BlankLayout";
+import UserLayout from "@/layouts/UserLayout";
 import {
   Home,
   About,
@@ -17,7 +18,9 @@ import {
   NotFound,
   ProductDetail,
   SearchResults,
+  UserCenter,
 } from "../pages";
+import RequireAuth from "@/HOCs/RequireAuth";
 
 const router = createBrowserRouter([
   // 根目录 "/"
@@ -70,6 +73,15 @@ const router = createBrowserRouter([
       { path: "signin", element: <SignIn /> },
       { path: "register", element: <Register /> },
     ],
+  },
+  {
+    path: "/user",
+    element: (
+      <RequireAuth>
+        <UserLayout />
+      </RequireAuth>
+    ),
+    children: [{ path: "", element: <UserCenter /> }],
   },
 ]);
 
